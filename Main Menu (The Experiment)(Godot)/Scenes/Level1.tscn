@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://BackGrounds/1.koridor.png" type="Texture" id=3]
+[ext_resource path="res://Characthers/Doktor-Sheet.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 863, 34.375 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 416.5, 4.75 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 25, 38.5 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Run"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7, 8 ]
+}
+
+[node name="Level1" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2( -4, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ground"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 675.5, 559 )
+scale = Vector2( 26.9219, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2( 679, 559 )
+shape = SubResource( 1 )
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2( 380, -229 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Wall"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 915, 387 )
+rotation = 1.5708
+scale = Vector2( 26.5859, 0.171318 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 914.75, 574 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2( -935, -213 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Wall2"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 915, 387 )
+rotation = 1.5708
+scale = Vector2( 26.5859, 0.171318 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2( 914.75, 574 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -16.0
+margin_top = 376.0
+margin_right = 484.0
+margin_bottom = 436.0
+rect_scale = Vector2( 2.6, 2.5 )
+texture = ExtResource( 3 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 209, 48 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 108.5, 446.25 )
+scale = Vector2( 2.81667, 2.24167 )
+texture = ExtResource( 4 )
+hframes = 9
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2( 103, 439.5 )
+shape = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 105, 440 )
+offset = Vector2( 6, 0 )
+current = true
+zoom = Vector2( 0.494, 0.313 )
+smoothing_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+anims/Idle = SubResource( 4 )
+anims/RESET = SubResource( 5 )
+anims/Run = SubResource( 6 )
